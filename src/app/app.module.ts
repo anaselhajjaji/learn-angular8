@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
+  declarations: [ // this is where app components should be declared
     AppComponent
   ],
-  imports: [
+  imports: [ // to add other modules to be used within the app
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // the startup component
 })
 export class AppModule { }
