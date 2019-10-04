@@ -11,6 +11,9 @@ ngModel is a directive (directives are instructions in the DOM), components are 
 <ng-template #somElse>
     <p>Something else</p>
 </ng-template>
+- ngStyle directive: <p [ngStyle]={backgroundColor: getColorFromTsMethod()}>Something</p>
+- ngClass directive: <p [ngClass]={classFromCSS: getBoolFromTsMethod()}>Something</p>
+- ngFor directive: <app-server *ngFor="let server of servers; let i = index"></app-server>
 
 The MDN (Mozilla Developer Network) offers nice lists of all properties and events of 
 the element you're interested in. Googling for YOUR_ELEMENT properties  or YOUR_ELEMENT events  
