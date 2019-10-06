@@ -1,5 +1,9 @@
 # Notes
 
+## General notes
+- Before starting an app, components and data model should be designed to define the application structure
+- The CSS only applies to the component and doesn't affect other components because of Encapsulation by default set to Emulated and this behavior can be changed in the component by adding `@Component({encapsulation: ViewEncapsulation.None})`
+
 ## Possibilities we can have in the Angular template
 
 Possibilities are presented below:
@@ -10,6 +14,7 @@ Possibilities are presented below:
 `onInputClickMethod(event: Event) {}`
 - Two way binding (requires FormsModule to be added to imports): `<input type="text" [(ngModel)]="varFromTs" />`
 ngModel is a directive (directives are instructions in the DOM), components are directives.
+- Another way in case we don't want to use Two Binding isthe use of 'reference elements' in the template: `<input type="text" #theElementRef>` and in the component and this can be used everywhere in the template for example calling a method: `(click)="onButtonClicked(theElementRef)"` and to access this in the typescript we need to declare a property: `@ViewChild('theElementRef') theElementRefProperty: ElementRef` and to get access to the native element we should call: `theElementRefProperty.nativeElement`
 - conditions: ngIf has a * because its a structural directive (that changes the dom)
 `<p *ngIf="boolInTsFile; else somElse">Something</p><ng-template #somElse><p>Something else</p></ng-template>`
 - ngStyle directive: `<p [ngStyle]={backgroundColor: getColorFromTsMethod()}>Something</p>`
