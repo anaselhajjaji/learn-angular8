@@ -1,6 +1,4 @@
-# Course notes
-
-## Notes
+# Notes
 
 ## Possibilities we can have in the Angular template
 
@@ -22,7 +20,7 @@ The MDN (Mozilla Developer Network) offers nice lists of all properties and even
 the element you're interested in. Googling for YOUR_ELEMENT properties  or YOUR_ELEMENT events  
 should yield nice results.
 
-### Passing Data and events between components
+## Passing Data and events between components
 
 We can pass data / events between components using binding:
 - For data: elements in a component are not exposed by default, to expose an element we should define it this way: `@Input element: TheType;` or `@Input('theAlias') element: TheType;`
