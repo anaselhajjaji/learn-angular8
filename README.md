@@ -37,7 +37,7 @@ It will be available outside using bindig, example: `<app-the-component [element
 - ngStyle directive: `<p [ngStyle]={backgroundColor: getColorFromTsMethod()}>Something</p>`
 - ngClass directive: `<p [ngClass]={classFromCSS: getBoolFromTsMethod()}>Something</p>`
 - ngFor directive: `<app-server *ngFor="let server of servers; let i = index"></app-server>`
-- we can create our directive: 
+- we can create our directive using CLI: `ng generate directive the-name`
 ```typescript
 @Directive({
     selector: '[appMyDirective]'
@@ -49,7 +49,21 @@ export class MyDirective implements OnInit {
     constructor(private elementRef: ElementRef) {}
 
     ngOnInit() {
+        // not the best solution to get access directly to the element but it's possible
         this.elementRef.nativeElement.style.backgroundColor = 'red';
+    }
+}
+
+// Best solution
+@Directive({
+    selector: '[appMyBestDirective]'
+})
+export class MyBestDirective implements OnInit {
+    constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+    // using the renderer is better practice: https://angular.io/api/core/Renderer2
+    ngOnInit() {
+        this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'red');
     }
 }
 ```
