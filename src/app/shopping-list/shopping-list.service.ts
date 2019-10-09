@@ -17,4 +17,9 @@ export class ShoppingListService {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
+
+    addIngredients(ingredients: Ingredient[]) {
+        this.ingredients.push(...ingredients); // to spread the list into single elements, because we cannot push an array
+        this.ingredientsChanged.emit(this.ingredients.slice());
+    }
 }
