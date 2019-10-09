@@ -175,6 +175,19 @@ Instead of adding a service class to the providers[]  array in AppModule , we ca
 export class MyService { ... }
 ```
 
+## Routing
+To register the routes we can add an array in app.module.ts as follows:
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users', component: UsersComponent }
+];
+@NgModule({
+...
+imports: [RouterModule.forRoot(appRoutes)]
+```
+And in the page, call the router: `<router-outlet></router-outlet>`.
+
 ## Interesting tools
 
 Augury (https://chrome.google.com/webstore/detail/augury/elgalmkoelokbchhkhacckoklkejnhcd?hl=en)
