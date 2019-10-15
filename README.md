@@ -186,6 +186,20 @@ const appRoutes: Routes = [
 ...
 imports: [RouterModule.forRoot(appRoutes)]
 ```
+Or can be created in a separate module (to be added in app.module imports):
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users', component: UsersComponent }
+];
+
+@NgModule({
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
+```
 And in the page, call the router: `<router-outlet></router-outlet>`.
 And to add a link for navigation use: `<a routerLink="/theLink">The Link</a>` of `[routerLink]="['/theLink', 'id']"` instead of href because href reloads the entire app.
 Note that `routerLink="/theLink"` is absolute path and `routerLink="theLink"` is a relative path.
@@ -255,6 +269,30 @@ ngOnInit() {
         ...
     });
 }
+```
+
+To preserve the query parameters when navigating:
+`this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});`
+
+### Nested (Child) routing
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users', component: UsersComponent, children : [
+        { path: ':id', component: UserComponent },
+        ...
+    ]}
+];
+```
+And in the users html file add, `<router-outlet></router-outlet>`.
+
+### Wildcard routes
+```typescript
+const appRoutes: Routes = [
+    ...
+    { path: 'not-found', component: PageNotFoundComponent },
+    { path: '**', redirectTo: '/not-found' } // should be the last route
+];
 ```
 
 ## Interesting tools
