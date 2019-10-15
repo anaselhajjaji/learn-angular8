@@ -187,6 +187,40 @@ const appRoutes: Routes = [
 imports: [RouterModule.forRoot(appRoutes)]
 ```
 And in the page, call the router: `<router-outlet></router-outlet>`.
+And to add a link for navigation use: `<a routerLink="/theLink">The Link</a>` of `[routerLink]="['/theLink', 'id']"` instead of href because href reloads the entire app.
+Note that `routerLink="/theLink"` is absolute path and `routerLink="theLink"` is a relative path.
+For styling we can use: `<a routerLink="/theLink" routerLinkActive="active">The Link</a>`
+For the root path it won't work and we need the following code: `<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>`
+### Programmaticaly 
+```typescript
+constructor(private router: Router) {} // inject the router
+
+onButtonClick() {
+    this.router.navigate(['/newLink']);
+}
+```
+And also,
+```typescript
+constructor(private router: Router, private route: ActivatedRoute) {} // inject the router and the current route
+
+onButtonClick() {
+    this.router.navigate(['/newLink'], {relativeTo: this.route});
+}
+```
+### Passing parameters
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users/:id', component: UserComponent }
+];
+```
+And in the UserComponent,
+```typescript
+constructor(private route: ActivatedRoute) {}
+ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+}
+```
 
 ## Interesting tools
 
