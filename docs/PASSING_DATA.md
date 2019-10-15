@@ -1,0 +1,4 @@
+We can pass data / events between components using binding:
+- For data: elements in a component are not exposed by default, to expose an element we should define it this way: `@Input element: TheType;` or `@Input('theAlias') element: TheType;`
+It will be available outside using bindig, example: `<app-the-component [element]= "theElement" />` or `<app-the-component [theAlias]= "theElement" />`
+- For events: first define the `onSomethingHappened(eventData: EventDataType)` on the parent component and in the component we can have: `<app-the-component (somethingHappened)="onSomethingHappened($event)" />`, the event declararion: `@Output() somethingHappened = new EventEmitter<EventDataType>()` (or using Alias `@Output('theAliasName') somethingHappened = new EventEmitter<EventDataType>()`) then the event can be called using: `somethingHappened.emit(theObjectData)`
