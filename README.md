@@ -1,10 +1,6 @@
 # Notes
 
-## General notes
-- Before starting an app, components and data model should be designed to define the application structure
-- The CSS only applies to the component and doesn't affect other components because of Encapsulation by default set to Emulated and this behavior can be changed in the component by adding `@Component({encapsulation: ViewEncapsulation.None})`
-- injecting content inside a component (`<app-component>HERE</app-component>`): by default Angular deletes all the content injected inside a component. To achieve this: just call `<ng-content></ng-content>` inside the template of the app-component, the content will be added automatically, the content can have a reference using '#' and can be accessed using `@ContentChild('theContentReference')`
-- components lifecycle hooks: ngOnChanges -> called whenever a bound input property is changed, ngOnInit -> called once the component is initialized, ngDoCheck -> called every change detection run (every change on the template), ngAfterContentInit -> called after content (ng-content) has been projected into the view, ngAfterContentChecked -> called everytime the projected content is checked, ngAfterViewInit -> called after the components view has been initialized, ngAfterViewChecked -> called  everytime the view has been checked, ngOnDestroy -> the view has been destroyed. 
+[General notes](docs/GENERAL.md)
 
 ## Possibilities we can have in the Angular template
 
