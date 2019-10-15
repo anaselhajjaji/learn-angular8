@@ -28,7 +28,7 @@ Note that `routerLink="/theLink"` is absolute path and `routerLink="theLink"` is
 For styling we can use: `<a routerLink="/theLink" routerLinkActive="active">The Link</a>`
 For the root path it won't work and we need the following code: `<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>`
 
-# Programmaticaly 
+## Programmaticaly 
 ```typescript
 constructor(private router: Router) {} // inject the router
 
@@ -45,7 +45,7 @@ onButtonClick() {
 }
 ```
 
-# Passing parameters
+## Passing parameters
 ```typescript
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -72,7 +72,7 @@ ngOnDestroy() {
     this.subscription.unsubscribe(); // not needed, angular will do it for this case, but it's an interesting thing to do in case of observers.
 }
 ```
-## Query parameters
+### Query parameters
 For query params: `<a routerLink="/theLink" [queryParams]="{key1: 'value1', key2: 'value2'}">The Link</a>`
 For fragments: `<a routerLink="/theLink" fragment="loading">The Link</a>`
 Programmatically:
@@ -98,7 +98,7 @@ ngOnInit() {
 To preserve the query parameters when navigating:
 `this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});`
 
-# Nested (Child) routing
+## Nested (Child) routing
 ```typescript
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -110,11 +110,49 @@ const appRoutes: Routes = [
 ```
 And in the users html file add, `<router-outlet></router-outlet>`.
 
-# Wildcard routes
+## Wildcard routes
 ```typescript
 const appRoutes: Routes = [
     ...
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: '/not-found' } // should be the last route
+];
+```
+
+## Guards
+Used to protect routes, can be achieved using a service:
+```typescript
+@Injectable()
+export class AuthGuard implements CanActivate, CanActivateChild {
+    constructor(private authService: AuthService, private router: Router) {}
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+    : Observable<boolean> | Promise<boolean> | boolean // Can return either Observable, Promise or boolean synchronously
+    {
+        return this.authService.isAuthenticated().then(
+            (authenticated: boolean) => {
+                if (authenticated) {
+                    return true;
+                } else {
+                    this.router.navigate(['/']);
+                }
+            }
+        );
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+    : Observable<boolean> | Promise<boolean> | boolean // Can return either Observable, Promise or boolean synchronously
+    {
+        return this.canActivate(route, state);
+    }
+}
+```
+To use the this guard, in appRoutes: 'canActivate' protects the route and 'canActivateChild' protects the children
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users', canActivate: [AuthGuard], canActivateChild: [AuthGuard], component: UsersComponent, children : [
+        { path: ':id', component: UserComponent },
+        ...
+    ]}
 ];
 ```
