@@ -214,11 +214,46 @@ const appRoutes: Routes = [
     { path: 'users/:id', component: UserComponent }
 ];
 ```
-And in the UserComponent,
+And in the UserComponent (this approach will work only the first time the component is instanciated),
 ```typescript
 constructor(private route: ActivatedRoute) {}
 ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+}
+```
+Approach that works everytime (using Observable):
+```typescript
+subscription: Subscription;
+constructor(private route: ActivatedRoute) {}
+ngOnInit() {
+    this.subscription = this.route.params.subscribe((params: Params) => {
+        this.id = params['id'];        
+    });
+}
+ngOnDestroy() {
+    this.subscription.unsubscribe(); // not needed, angular will do it for this case, but it's an interesting thing to do in case of observers.
+}
+```
+#### Query parameters
+For query params: `<a routerLink="/theLink" [queryParams]="{key1: 'value1', key2: 'value2'}">The Link</a>`
+For fragments: `<a routerLink="/theLink" fragment="loading">The Link</a>`
+Programmatically:
+```typescript
+constructor(private router: Router) {} // inject the router
+
+onButtonClick() {
+    this.router.navigate(['/newLink'], {queryParams: {key1: 'value1', key2: 'value2'}, fragment: 'loading'});
+}
+```
+To retrieve them (same as before):
+```typescript
+constructor(private route: ActivatedRoute) {}
+ngOnInit() {
+    this.route.snapshot.queryParams... // or this.route.snapshot.fragment
+    // OR
+    this.route.queryParams.subscribe((params: Params) => {
+        ...
+    });
 }
 ```
 
