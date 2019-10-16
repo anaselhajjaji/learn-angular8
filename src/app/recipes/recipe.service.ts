@@ -25,6 +25,10 @@ export class RecipeService {
         return this.recipes.slice(); // to return a copy to avoid returning the reference to the recipe property.
     }
 
+    getRecipe(id: number) {
+      return this.recipes[id];
+    }
+
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
       this.slService.addIngredients(ingredients);
     }
