@@ -71,5 +71,7 @@ However, EventEmitter still should be used in @Output case.
 
 ## Useful Resources
 Official Docs: https://rxjs-dev.firebaseapp.com/
+
 RxJS Series: https://academind.com/learn/javascript/understanding-rxjs/
+
 Updating to RxJS 6: https://academind.com/learn/javascript/rxjs-6-what-changed/

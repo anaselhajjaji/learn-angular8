@@ -13,3 +13,5 @@
 [Routing](docs/ROUTING.md)
 
 [Observables](docs/OBSERVABLE.md)
+
+[Forms](docs/FORMS.md)
