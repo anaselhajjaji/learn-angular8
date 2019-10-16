@@ -14,7 +14,7 @@ export class RecipeEditComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
+    this.route.params.subscribe( // will be cleaned automatically by Angular, no need for unsubscribe
       (params: Params) => {
         this.id = +params['id'];
         this.editMode = params['id'] != null;

@@ -18,7 +18,7 @@ export class RecipeDetailComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
+    this.route.params.subscribe( // will be cleaned automatically by Angular, no need for unsubscribe
       (params: Params) => {
         this.id = +params['id'];
         this.recipe = this.recipeService.getRecipe(this.id);
