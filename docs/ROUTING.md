@@ -120,6 +120,7 @@ const appRoutes: Routes = [
 ```
 
 ## Guards
+### CanActivate Guard
 Used to protect routes, can be achieved using a service:
 ```typescript
 @Injectable()
@@ -155,4 +156,116 @@ const appRoutes: Routes = [
         ...
     ]}
 ];
+```
+### CanDeactivate Guard to prevent the user from accidentally leaving a route
+First create an interface and a service:
+```typescript
+export interface CanComponentDeactivate {
+    canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+
+export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+    canDeactivate(component: CanComponentDeactivate, 
+                currentRoute: ActivatedRouteSnapshot, 
+                currentState: RouterStateSnapshot, 
+                nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        return component.canDeactivate();
+    }
+}
+```
+In the route:
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'users', canDeactivate: [CanDeactivateGuard], component: UsersComponent, children : [
+        { path: ':id', component: UserComponent },
+        ...
+    ]}
+];
+```
+Then in the component:
+```typescript
+export class UsersComponent implements CanComponentDeactivate {
+    canDeactivate: Observable<boolean> | Promise<boolean> | boolean {
+        if (this.canLeave) {
+            return true;
+        }
+        else {
+            return confirm('Do you want to leave?');
+        }
+    }
+}
+```
+### Passing static data to a route
+```typescript
+const appRoutes: Routes = [
+    ...
+    { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+    { path: '**', redirectTo: '/not-found' } // should be the last route
+];
+```
+And in the component:
+```typescript
+export class ErrorPageComponent implements OnInit {
+    errorMessage: string;
+    constructor(private route: ActivatedRoute) {}
+    ngOnInit() {
+        this.errorMessage = this.route.snapshot.data['message'];
+        // Or use subscribe
+        this.route.data.subscribe(
+            (data: Data) => {
+                this.errorMessage = data['message'];
+            }
+        );
+    }
+}
+```
+### Passing dynamic data to a route
+Create a service:
+```typescript
+interface Server {
+    id: number,
+    name: string
+}
+@Injectable()
+export class ServerResolver implements Resolve<Server> {
+    constructor(private serverService: ServersService)
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Server> | Promise<Server> | Server  {
+        return this.serverService.getServer(+route.params['id']); // the '+' to cast the string to integer
+    }
+}
+```
+Add it to routing module:
+```typescript
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'servers', component: ServersComponent, children : [
+        { path: ':id', component: ServerComponent, resolve: {server: ServerResolver} },
+        ...
+    ]}
+];
+```
+And in the component:
+```typescript
+export class ServerComponent implements OnInit {
+    constructor(private route: ActivatedRoute) {}
+    ngOnInit() {
+        this.route.data.subscribe(
+            (data: Data) => {
+                this.server = data['server'];
+            }
+        );
+    }
+}
+```
+### Routing strategy
+In real world this routing method wont work because the URL: localhost:4200/servers will force the server that hosts the app to look for the route /servers before Angular.
+To fix this we need to use the hash method that will add a hash (example: localhost:4200/#/servers) that will tell the hosting server only care about what's before the '#': 
+```typescript
+@NgModule({
+    imports: [RouterModule.forRoot(appRoutes, {useHash: true})],
+    exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
 ```
