@@ -11,3 +11,5 @@
 [Services and dependency injection](docs/SERVICES.md)
 
 [Routing](docs/ROUTING.md)
+
+[Observables](docs/OBSERVABLE.md)
