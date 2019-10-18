@@ -28,4 +28,25 @@ export class AppComponent {
 }
 ```
 
+### User input validation
+Required: `<input type="text" ngModel name="theName" required>`
+Email validator: `<input type="text" ngModel name="theName" required email>`
+The validation result can be seen in form object as well as in the control: 'valid' field.
+To disable a button if form not valid: `<button [disabled]="!theForm.valid">`
+To change styles for example:
+```css
+input.ng_invalid.ng-touched {
+    border: 1px solid red;
+}
+```
+To output the error message:
+```html
+<input ngModel required email #email="ngModel">
+<p *ngIf="!email.valid && email.touched">Please enter a valid email</p>
+```
+To set a default value for input use: `[ngModel]="propInTypescript"`
+Two way binding can be used as well: `[(ngModel)]="propInTypescript"`
+Form groups can be defined using: `<div id="a-group" ngModelGroup="aGroup">` and this group can be found inside the form object in form of FormGroup, the validity can be checked using css on the group and can be treated as previously done on FormControl.
+We can change the form programmatically by calling: `this.theForm.setValue({...})` that sets all the form and the better approach is: `this.theForm.form.patchValue({...})` that doesn't override the other values.
+
 ## Reactive approach
