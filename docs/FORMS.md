@@ -48,5 +48,6 @@ To set a default value for input use: `[ngModel]="propInTypescript"`
 Two way binding can be used as well: `[(ngModel)]="propInTypescript"`
 Form groups can be defined using: `<div id="a-group" ngModelGroup="aGroup">` and this group can be found inside the form object in form of FormGroup, the validity can be checked using css on the group and can be treated as previously done on FormControl.
 We can change the form programmatically by calling: `this.theForm.setValue({...})` that sets all the form and the better approach is: `this.theForm.form.patchValue({...})` that doesn't override the other values.
+To reset a form: `this.theForm.reset()`.
 
 ## Reactive approach
