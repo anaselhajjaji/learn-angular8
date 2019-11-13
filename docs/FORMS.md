@@ -51,3 +51,39 @@ We can change the form programmatically by calling: `this.theForm.setValue({...}
 To reset a form: `this.theForm.reset()`.
 
 ## Reactive approach
+
+To objective is to create the form programmatically in typescript.
+
+First, import: ReactiveFormsModule in app.module.ts
+
+Then,
+```typescript
+theForm: FormGroup;
+testProp: string;
+ngOnInit() { 
+    // NOTE THAT: we can have a nested Form, create a FormGroup inside the FormGroup and in html we need to use: <div formGroupName='nestedFormGroupName'>
+    // Also if we want to have dynamic forms, we need to use FormArray and add ngFor in html to create and synchronize html control with FormControl.
+    this.theForm = new FormGroup({
+        'username': new FormControl('Default value', [Validators.required, this.customValidator.bind(this)]), // bind(this) because in the validator we are using class property and the validator is called from the outside.
+        'email': new FormControl(null, [Validators.required, Validators.email])
+    });
+}
+
+onSubmit() {
+}
+
+customValidator(control: FormControl): {[s: string]: boolean} {
+    // check on control.value
+    if (this.testProp != null) {}
+    return {'ErrorCode', true};
+    // return null, if correct
+}
+
+```
+And to sync with html,
+```html
+<form [formGroup]='theForm' (ngSubmit)='onSubmit()'>
+    <input type='text' id='username' formControlName='username'>
+    <span *ngIf="!theForm.get('username').valid && theForm.get('username').touched">
+        Please choose a valid username!</span>
+```
