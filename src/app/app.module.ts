@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -16,7 +17,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 
 @NgModule({
   declarations: [ // this is where app components should be declared
-    AppComponent, 
+    AppComponent,
     HeaderComponent, 
     RecipesComponent, 
     RecipeListComponent, 
@@ -30,7 +31,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
   ],
   imports: [ // to add other modules to be used within the app
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent] // the startup component
