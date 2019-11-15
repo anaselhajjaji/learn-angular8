@@ -65,8 +65,16 @@ ngOnInit() {
     // Also if we want to have dynamic forms, we need to use FormArray and add ngFor in html to create and synchronize html control with FormControl.
     this.theForm = new FormGroup({
         'username': new FormControl('Default value', [Validators.required, this.customValidator.bind(this)]), // bind(this) because in the validator we are using class property and the validator is called from the outside.
-        'email': new FormControl(null, [Validators.required, Validators.email])
+        'email': new FormControl(null, [Validators.required, Validators.email], this.customAsyncValidator)
     });
+
+    // We can subscrive to value changes event
+    this.theForm.valueChanges.subscribe((value) => console.log(value));
+
+    // We can subscrive to status changes event
+    this.theForm.statusChanges.subscribe((status) => console.log(status));
+
+    // We can also call: this.theForm.setValue({}); and this.theForm.patchValue({});
 }
 
 onSubmit() {
@@ -79,6 +87,20 @@ customValidator(control: FormControl): {[s: string]: boolean} {
     // return null, if correct
 }
 
+customAsyncValidator(control: FormControl): Promise<Any> | Observable<Any> {
+    const promise = new Promise<Any>((resolve, reject) => {
+        setTimeout(() => {
+            if (control.value === 'something...') {
+                resolve({'IncorrectValue': true});
+            }
+            else {
+                resolve(null);
+            }
+        }, 2000);
+    });
+    return promise;
+}
+
 ```
 And to sync with html,
 ```html
@@ -86,4 +108,8 @@ And to sync with html,
     <input type='text' id='username' formControlName='username'>
     <span *ngIf="!theForm.get('username').valid && theForm.get('username').touched">
         Please choose a valid username!</span>
+    <span *ngIf="theForm.get('username').errors['ErrorCode']">
+        Error related to ErrorCode!</span>
+    <button type="submit">Submit</button>
+</form>
 ```
