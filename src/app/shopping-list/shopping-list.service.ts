@@ -23,4 +23,8 @@ export class ShoppingListService {
         this.ingredients.push(...ingredients); // to spread the list into single elements, because we cannot push an array
         this.ingredientsChanged.next(this.ingredients.slice());
     }
+
+    getIngredient(id: number) {
+        return this.ingredients[id];
+    }
 }
