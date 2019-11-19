@@ -15,3 +15,5 @@
 [Observables](docs/OBSERVABLE.md)
 
 [Forms](docs/FORMS.md)
+
+[Pipes](docs/PIPES.md)
