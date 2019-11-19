@@ -14,6 +14,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeService } from './recipes/recipe.service';
 
 @NgModule({
   declarations: [ // this is where app components should be declared
@@ -35,7 +36,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     FormsModule,
     ReactiveFormsModule // To make the synchronizing with HTML in reactive mode working
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent] // the startup component
 })
 export class AppModule { }
