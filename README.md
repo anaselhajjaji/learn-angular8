@@ -17,3 +17,5 @@
 [Forms](docs/FORMS.md)
 
 [Pipes](docs/PIPES.md)
+
+[HTTP Requests](docs/HTTP.md)
