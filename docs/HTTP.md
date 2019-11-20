@@ -1,4 +1,4 @@
-## Send a POST request to Firebase
+## Send POST request to Firebase
 
 First, import HttpClientModule in AppModule.
 
@@ -15,7 +15,7 @@ postData(data: { name: string; lastName: string }) {
 }
 ```
 
-## Send a GET to Firebase
+## Send GET to Firebase
 
 ```typescript
 constructor(private http: HttpClient) {}
@@ -34,6 +34,47 @@ getData() {
     .subscribe(datas => {
         console.log(datas);
     });
+}
+```
+
+## Send DELETE to Firebase
+
+```typescript
+deleteData() {
+    this.http.delete('https://learn-angular-2a595.firebaseio.com/datas.json')
+        .subscribe(() => {
+            console.log('done');
+        });
+}
+```
+
+## Having a loading indicator for http request
+
+```typescript
+loading = false;
+getData() {
+    this.loading = true;
+
+    this.http.get(...)
+        .subscribe(datas => {
+            this.loading = false;
+            console.log(datas);
+        });
+}
+```
+
+And in the template,
+```html
+<p *ngIf="loading">Loading</p>
+```
+
+## Using a Service for http requests
+
+We can outsource the http requests in a dedicated service and to return the results to the component we can do it like below:
+
+```typescript
+getData() {
+    return this.http.get(...); // subscribe in the component, we can use subject as well in case where we might have multiple subscribers.
 }
 ```
 
