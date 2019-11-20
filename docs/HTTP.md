@@ -11,6 +11,8 @@ postData(data: { name: string; lastName: string }) {
         data
     ).subscribe(response => {
         console.log(response);
+    }, error => {
+        // error occured
     });
 }
 ```
