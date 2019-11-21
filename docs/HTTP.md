@@ -96,3 +96,24 @@ getData() {
 }
 ```
 
+## Interceptors
+
+The interceptor will run just before the request been sent.
+
+```typescript
+export class MyHttpInterceptor implements HttpInterceptor {
+    intercept(request: HttpRequest<any>, next: HttpHandler) {
+        // Do something with the request (for example modify the request)
+        let modifiedRequest = request.clone({headers: request.headers.append('addedHeaderKey', 'addedHeaderValue')});
+        return next.handle(modifiedRequest).pipe(tap(event => {
+            // add the pipe to intercept the response and do something with it
+        })); // call handle to let the request continue
+    }
+}
+
+// In AppModule
+/* add multi: true to support multi interceptors, the order matters */
+providers: [{provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true}, {provide: HTTP_INTERCEPTORS, useClass: MySecondHttpInterceptor, multi: true }]
+
+```
+
