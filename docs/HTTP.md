@@ -32,7 +32,9 @@ getData() {
             datasArray.push({ ...response[key], id: key }); // explode the data and add the id to the object
         }
         return datasArray;
-    })) 
+    }), catchError(error => { /* Do something */ 
+        return throwError(error);
+    })) // catchError and throwError are an rxjs operator 
     .subscribe(datas => {
         console.log(datas);
     });
@@ -77,6 +79,20 @@ We can outsource the http requests in a dedicated service and to return the resu
 ```typescript
 getData() {
     return this.http.get(...); // subscribe in the component, we can use subject as well in case where we might have multiple subscribers.
+}
+```
+
+## Passing headers and query params
+
+```typescript
+getData() {
+    this.http.get('url',
+    {
+        headers: new HttpHeaders({'key', 'value'}),
+        params: new HttpParams().set('key', 'value') // or append
+        observe: 'response' // to receive all the response, body is the default. We can use events to receive only http events.
+        responseType: 'json' // to specify to angular in which format we want the response: angular will do the transformation
+    });
 }
 ```
 
