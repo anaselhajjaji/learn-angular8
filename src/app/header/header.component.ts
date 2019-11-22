@@ -15,7 +15,7 @@ export class HeaderComponent {
   }
 
   onFetch() {
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe(); // we need to subscribe to be able to send the request
   }
 
 }
