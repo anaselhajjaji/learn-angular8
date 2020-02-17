@@ -21,3 +21,5 @@ This is for Angular 8.
 [Pipes](docs/PIPES.md)
 
 [HTTP Requests](docs/HTTP.md)
+
+[Authentication](docs/AUTHENTICATION.md)

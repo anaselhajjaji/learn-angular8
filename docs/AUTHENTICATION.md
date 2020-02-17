@@ -1,0 +1,1 @@
+The general idea is to send credentials to the server that give back a token to be stored by the Angular App. Then, the token will be sent for every request to the server that validates it.
