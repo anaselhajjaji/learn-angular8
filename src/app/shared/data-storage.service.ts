@@ -19,17 +19,14 @@ export class DataStorageService {
     }
 
     fetchRecipes() {
-        return this.authService.user.pipe(take(1), exhaustMap(user => { // use take to automatically unsubscribe. exhaustMap will wait for the first observable to complete.
-            return this.http.get<Recipe[]>('https://learn-angular-2a595.firebaseio.com/recipes.json', {
-                params: new HttpParams().set('auth', user.token)
-            });
-        }), map(recipes => { // all this map thing is to prevent from returning undefined ingredients
-            return recipes.map(recipe => {
-                return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
-            });
-        }), 
-        tap(recipes => { 
-            this.recipeService.setRecipes(recipes); 
-        }));
+        return this.http.get<Recipe[]>('https://learn-angular-2a595.firebaseio.com/recipes.json')
+            .pipe(map(recipes => { // all this map thing is to prevent from returning undefined ingredients
+                return recipes.map(recipe => {
+                    return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
+                });
+            }), 
+            tap(recipes => { 
+                this.recipeService.setRecipes(recipes); 
+            }));
     }
 }
