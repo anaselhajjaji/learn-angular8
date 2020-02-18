@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,10 +18,7 @@ import { AuthModule } from './auth/auth.module';
   imports: [ // to add other modules to be used within the app
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule, // To make the synchronizing with HTML in reactive mode working
-    RecipesModule,
     ShoppingListModule,
     SharedModule,
     CoreModule,
