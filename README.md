@@ -25,3 +25,5 @@ This is for Angular 8.
 [Authentication](docs/AUTHENTICATION.md)
 
 [Modules](docs/MODULES.md)
+
+[Deployment](docs/DEPLOY.md)
