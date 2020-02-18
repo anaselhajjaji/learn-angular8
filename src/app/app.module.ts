@@ -48,6 +48,9 @@ import { PlaceholderDirective } from './shared/placeholder/placeholder.directive
     ReactiveFormsModule // To make the synchronizing with HTML in reactive mode working
   ],
   providers: [ShoppingListService, RecipeService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
-  bootstrap: [AppComponent] // the startup component
+  bootstrap: [AppComponent], // the startup component
+  entryComponents: [ // for the components that will be created without selector or route, for example: dynamically in the code
+    AlertComponent
+  ]
 })
 export class AppModule { }
