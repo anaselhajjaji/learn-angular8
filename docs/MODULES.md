@@ -1,4 +1,4 @@
-Angular app can be split in several modules (application building blocks) but at least one module should be defined, in general AppModule.
+Angular app can be split in several modules (application building blocks of feature module) but at least one module should be defined, in general AppModule.
 
 In a module we can find:
 - Declarations: components, directives and custom pipes
