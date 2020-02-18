@@ -10,3 +10,5 @@ In a module we can find:
 - Providers: for services and interceptors
 - Bootsrap: the component provided in index.html that starts the app
 - entryComponents: for the components that we need to create programmatically in code
+
+The idea behind lazy loading is to load and download only the visited module route.
