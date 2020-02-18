@@ -23,3 +23,5 @@ This is for Angular 8.
 [HTTP Requests](docs/HTTP.md)
 
 [Authentication](docs/AUTHENTICATION.md)
+
+[Modules](docs/MODULES.md)
