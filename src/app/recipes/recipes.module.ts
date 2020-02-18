@@ -6,9 +6,9 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipesComponent } from './recipes.component';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesRoutingModule } from './recipes-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -21,9 +21,9 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     ],
     imports: [
         RouterModule,
-        CommonModule, // To be added instead of BrowserModule that should be present in AppModule
         ReactiveFormsModule,
-        RecipesRoutingModule
+        RecipesRoutingModule,
+        SharedModule
     ],
     /* exports: [ // List the components that can be used outside this module
         RecipesComponent, 
