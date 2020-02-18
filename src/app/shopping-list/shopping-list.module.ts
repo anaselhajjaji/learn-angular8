@@ -11,11 +11,11 @@ import { FormsModule } from '@angular/forms';
         ShoppingEditComponent
     ],
     imports: [
+        CommonModule,
+        FormsModule,
         RouterModule.forChild([
             { path: 'shopping-list', component: ShoppingListComponent }
-        ]),
-        CommonModule,
-        FormsModule
+        ])
     ]
 })
 export class ShoppingListModule {
