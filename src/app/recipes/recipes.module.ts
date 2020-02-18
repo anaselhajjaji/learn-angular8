@@ -5,6 +5,9 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipesComponent } from './recipes.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -14,6 +17,11 @@ import { RecipesComponent } from './recipes.component';
         RecipeItemComponent,
         RecipeStartComponent,
         RecipeEditComponent
+    ],
+    imports: [
+        RouterModule,
+        CommonModule, // To be added instead of BrowserModule that should be present in AppModule
+        ReactiveFormsModule
     ],
     exports: [ // List the components that can be used outside this module
         RecipesComponent, 
