@@ -11,12 +11,12 @@ import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [ // this is where app components should be declared
     AppComponent,
-    HeaderComponent, 
-    AuthComponent
+    HeaderComponent
   ],
   imports: [ // to add other modules to be used within the app
     BrowserModule,
@@ -27,11 +27,9 @@ import { CoreModule } from './core.module';
     RecipesModule,
     ShoppingListModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    AuthModule
   ],
   bootstrap: [AppComponent], // the startup component
-  entryComponents: [ // for the components that will be created without selector or route, for example: dynamically in the code
-    AlertComponent
-  ]
 })
 export class AppModule { }
