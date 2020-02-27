@@ -16,3 +16,6 @@ The differences between Redux and NgRx are:
 - NgRX is well integrated with Angular
 - typescript usage
 - NgRx solved the side effects question: http requests
+
+To install:
+- `npm install --save @ngrx/store`

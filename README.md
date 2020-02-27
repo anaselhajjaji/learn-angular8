@@ -28,4 +28,4 @@ This is for Angular 8.
 
 [Deployment](docs/DEPLOY.md)
 
-[NgRX](docs/NGRX.md)
+[NgRx](docs/NGRX.md)
