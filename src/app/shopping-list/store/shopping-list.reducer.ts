@@ -1,6 +1,5 @@
 import { Ingredient } from '../../shared/ingredient.model';
-import { Action } from '@ngrx/store';
-import * as shoppingListActions from './shopping-list.actions';
+import * as ShoppingListActions from './shopping-list.actions';
 
 const initialState = {
     ingredients: [
@@ -9,14 +8,22 @@ const initialState = {
     ]
 }
 
-export function shoppingListReducer(state = initialState, action: shoppingListActions.AddIngredient /* action that triggered the reducer */) {
+export function shoppingListReducer(state = initialState, action: ShoppingListActions.ShoppingListActions /* action that triggered the reducer */) {
     switch (action.type) {
-        case shoppingListActions.ADD_INGREDIENT:
+        case ShoppingListActions.ADD_INGREDIENT:
             return { // should not change the current state, we should create a new one
                 ...state, // copy the current state properties then we can override what we need after
                 ingredients: [
                     ...state.ingredients, // copy the current ingredients
                     action.payload
+                ]    
+            };
+        case ShoppingListActions.ADD_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: [
+                    ...state.ingredients,
+                    ...action.payload
                 ]    
             };
         default:
