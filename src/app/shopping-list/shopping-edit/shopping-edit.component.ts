@@ -41,7 +41,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
-      this.slService.updateIngredient(this.editedItemId, newIngredient);
+      //this.slService.updateIngredient(this.editedItemId, newIngredient);
+      this.store.dispatch(new ShoppingListActions.UpdateIngredient({
+        index: this.editedItemId, 
+        ingredient: newIngredient }));
     } else {
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
       /* Will use NgRx for that
@@ -58,7 +61,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.slService.deleteIngredient(this.editedItemId);
+    //this.slService.deleteIngredient(this.editedItemId);
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient(this.editedItemId));
     this.onClear();
   }
 
