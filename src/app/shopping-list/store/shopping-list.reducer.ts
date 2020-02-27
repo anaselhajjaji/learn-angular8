@@ -19,5 +19,7 @@ export function shoppingListReducer(state = initialState, action: shoppingListAc
                     action.payload
                 ]    
             };
+        default:
+            return state; // return the unchanged state, will be used for initialization
     }
 }
