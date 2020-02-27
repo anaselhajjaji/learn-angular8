@@ -27,3 +27,5 @@ This is for Angular 8.
 [Modules](docs/MODULES.md)
 
 [Deployment](docs/DEPLOY.md)
+
+[NgRX](docs/NGRX.md)
