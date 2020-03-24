@@ -26,12 +26,13 @@ export function authReducer(state = initialState,
             };
         case AuthActions.LOGOUT:
             return {
-                ...state,
+                ...state, // important to copy the state before overriding it
                 user: null
             };
-        default:
+        // important to initialize the state, because 
+        // at the startup ngrx sends initial actions to reducers
+        default: 
             return state;
-
     }
     
 }
