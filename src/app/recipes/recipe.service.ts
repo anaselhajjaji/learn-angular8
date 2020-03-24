@@ -1,6 +1,5 @@
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -14,7 +13,7 @@ export class RecipeService {
 
     private recipes: Recipe[] = [];
 
-    constructor(private slService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
+    constructor(private store: Store<fromShoppingList.AppState>) {}
 
     getRecipes() {
         return this.recipes.slice(); // to return a copy to avoid returning the reference to the recipe property.
