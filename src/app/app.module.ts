@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [ // this is where app components should be declared
@@ -17,7 +17,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
   imports: [ // to add other modules to be used within the app
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ shoppingList: shoppingListReducer }), // add here all the reducer funtions
+    StoreModule.forRoot(fromApp.appReducer), // add here all the reducer funtions
     HttpClientModule,
     SharedModule,
     CoreModule
