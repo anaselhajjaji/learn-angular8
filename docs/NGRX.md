@@ -20,6 +20,10 @@ The differences between Redux and NgRx are:
 To install:
 - `npm install --save @ngrx/store`
 
-Summary: we register a store in app module, then in the reducer main function we receive the dispatched action (store.dispatch), we add a switch on the action then we return the new object that replaces the current state based on the payload sent with that action.
+Summary
+
+We register a store in app module, then in the reducer main function we receive the dispatched action (store.dispatch), we add a switch on the action then we return the new object that replaces the current state based on the payload sent with that action.
 
 store.dispatch() reaches all the reducers.
+
+We shouldn't add http requests (or local storage usage) in reducers, this case is considered as side effect and should be handled using @ngrx/effects.
