@@ -18,7 +18,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   editMode = false;
-  editedItemId: number;
   editedItem: Ingredient;
 
   constructor(private slService: ShoppingListService, private store: Store<fromShoppingList.AppState>) { }
@@ -43,9 +42,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
       //this.slService.updateIngredient(this.editedItemId, newIngredient);
-      this.store.dispatch(new ShoppingListActions.UpdateIngredient({
-        index: this.editedItemId, 
-        ingredient: newIngredient }));
+      this.store.dispatch(new ShoppingListActions.UpdateIngredient(newIngredient));
     } else {
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
       /* Will use NgRx for that
@@ -64,7 +61,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   onDelete() {
     //this.slService.deleteIngredient(this.editedItemId);
-    this.store.dispatch(new ShoppingListActions.DeleteIngredient(this.editedItemId));
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient());
     this.onClear();
   }
 
