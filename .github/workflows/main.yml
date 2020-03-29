@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build image
       if: success()
-      run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} .
+      run: docker build -t ${GITHUB_REPOSITORY} .
     - name: Deploy to Heroku
       if: success()
       uses: AkhileshNS/heroku-deploy@v3.0.0
